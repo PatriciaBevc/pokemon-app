@@ -1,0 +1,234 @@
+//Fonts
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+// Variables
+$base-color: rgb(255, 250, 238);
+$base-text-color: rgb(22, 22, 22);
+$secondary-color: #e5f3a9;
+$accent-color: rgb(255, 222, 161);
+$active-color: rgb(253, 187, 63);
+$title-font-size: 22px;
+$title-font-family: 'Press Start 2P';
+
+ul{
+  padding-inline-start: 0px;
+}
+
+// Mixin for basic card style
+@mixin card($bg-color, $text-color, $hover-color) {
+  color: $text-color;
+  cursor: pointer;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: 1px solid $text-color;
+  border-radius: 18px;
+  background-color: $bg-color;
+  
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+// Navbar styles
+.navbar {
+  text-align: center;
+  margin: 2rem auto 3rem;
+
+  &__list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 0;
+
+    & .navbar__item {
+      @include card($base-color, $base-text-color, $accent-color);
+      display: block;
+      width: 100px;
+      
+      &:focus{
+        background-color: $active-color;
+      }
+    }
+  }
+}
+
+// PokemonList
+.main {
+  text-align: center;
+  margin: 2rem auto;
+  width: 60%;
+  height: 100vh;
+
+  h1{
+    font-family: $title-font-family;
+    font-size: $title-font-size;
+    margin-bottom: 3rem;
+  }
+  ul{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    
+    .list__item {
+      cursor: pointer;
+      list-style: none;
+      margin-bottom: 30px;
+      flex-basis: calc(25% - 0.5rem);
+      
+      .list__link{
+        @include card ($base-color, $base-text-color, $secondary-color);
+        width: 120px;
+        display: block;
+        text-transform: capitalize;
+
+        .favorite_icon{
+          height: 18px;
+          width: auto;
+          fill: red;
+        }
+      }
+    }
+  }
+  
+}
+
+//PokemonInfo
+.loading{
+  margin: auto;
+  text-align: center;
+  height: 100vh;
+}
+
+.pokemon{
+  display: block;
+  margin: auto;
+  text-align: center;
+  height: 100vh;
+  max-width: 330px;
+
+  button{
+    @include card($base-color, $base-text-color, $secondary-color);
+    display: block;
+    margin-bottom: 1rem;
+    
+    .back_link{
+      text-decoration: none;
+      color: $base-text-color;
+    }
+  }
+
+  &__info{
+    @include card($base-color, $base-text-color, -color);
+    max-width: 300px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: auto;
+
+    h2{
+      font-size: $title-font-size;
+      font-family: $title-font-family;
+      text-transform: capitalize;
+    }
+    img{
+      width: 250px;
+      height: auto;
+    }
+    .abilities{
+      margin-bottom: 1rem;
+      h3{
+        margin-bottom: -0.5rem;
+      }
+      ul{
+        text-align: left;
+        list-style: square;
+      }
+    }
+
+    button{
+      @include card($base-color, $base-text-color, $accent-color);
+      width: 200px;
+      
+      span{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+          .heart-icon{
+          height: 18px;
+          width: auto;
+          fill: red;
+        }
+      }
+      
+    }
+    
+  }
+  
+}
+
+//MyFavorites
+.favorites{
+  height: 100vh;
+  display: block;
+  text-align: center;
+  margin: auto;
+
+  h1{
+    font-family: $title-font-family;
+    font-size: $title-font-size;
+    margin-bottom: 3rem;
+  }
+
+  &__list{
+    display: block;
+    margin: auto;
+    text-align: center;
+
+    ul{
+      list-style: none;
+      margin: auto;
+    }
+
+    &_item{ 
+      width: 150px;
+      margin: 0 auto 2rem auto;
+
+      &_link{
+        @include card($base-color, $base-text-color, $secondary-color);
+        display: block;
+        text-transform: capitalize;
+        text-decoration: none;
+        color: $base-text-color;
+      }
+    }
+    
+  }
+}
+
+//ErrorPage
+.error{
+  height: 100vh;
+  text-align: center;
+  margin: 5rem auto;
+  
+  h1{
+    font-family: $title-font-family;
+    font-size: $title-font-size;
+  }
+
+  button{
+    @include card($base-color, $base-text-color, $secondary-color);
+    margin-top: 2rem;
+    
+    .back_link{
+      text-decoration: none;
+      color: $base-text-color;
+    }
+  }
+}
