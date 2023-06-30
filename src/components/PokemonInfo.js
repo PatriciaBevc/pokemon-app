@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import ErrorPage from './Error';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FavoriteContext } from '../contexts/FavoriteContext'; 
@@ -7,6 +8,7 @@ import { ReactComponent as FavoriteIcon } from './icons/favorite_FILL1_wght400_G
 import { ReactComponent as BrokenHeart } from './icons/heart_broken_FILL1_wght400_GRAD0_opsz48.svg'
 
 const PokemonInfo = () => {
+  const [isError, setIsError] = useState(null)
   const [pokemon, setPokemon] = useState(null);
   const [isFavourite, setFavourite] = useState(false);
   const { name } = useParams();
@@ -16,7 +18,7 @@ const PokemonInfo = () => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${name}`)
       .then(response => setPokemon(response.data))
-      .catch(err => console.log(err));
+      .catch(err => setIsError(err));
   }, [name]);
 
   useEffect(() => {
@@ -32,7 +34,9 @@ const PokemonInfo = () => {
     setFavourite(!isFavourite); 
   };
 
-  if (!pokemon) {
+  if (isError) {
+    return <ErrorPage />
+  } else if(!pokemon){
     return <div className="loading">Loading...</div>;
   }
 
